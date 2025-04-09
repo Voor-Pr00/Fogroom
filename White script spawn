@@ -1,4 +1,7 @@
-local whiteSpawn = Spawner.createEntity({
+local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/DoorSuff/main/OtherSuff/DoorEntitySpawn%2BSource"))()
+-- Create entity
+
+local Entity = Spawner.createEntity({
     CustomName = "WH1T3", -- Custom name of your entity
     Model = "16735149732", -- Can be GitHub file or rbxassetid
     Speed = 200, -- Percentage, 100 = default Rush speed
@@ -56,7 +59,7 @@ whiteSpawn.Debug.OnEntitySpawned = function()
     --print("Entity has spawned:", entityTable)
 end
 
-whiteSpawn.Debug.OnEntityDespawned = function()
+Entity.Debug.OnEntityDespawned = function()
     local Gglitchy = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy")
     local Gglitch1 = Gglitchy["Glitch Screen"].Glitch1
     local Gglitch2 = Gglitchy["Glitch Screen"].Glitch2
@@ -66,17 +69,17 @@ whiteSpawn.Debug.OnEntityDespawned = function()
     Gglitch3.Visible = false
 end
 
-whiteSpawn.Debug.OnEntityStartMoving = function()
+Entity.Debug.OnEntityStartMoving = function()
 end
 
-whiteSpawn.Debug.OnEntityFinishedRebound = function()
+Entity.Debug.OnEntityFinishedRebound = function()
 end
 
-whiteSpawn.Debug.OnEntityEnteredRoom = function(room)
+Entity.Debug.OnEntityEnteredRoom = function(room)
     --print("Entity:", entityTable, "has entered room:", room)
 end
 
-whiteSpawn.Debug.OnLookAtEntity = function()
+Entity.Debug.OnLookAtEntity = function()
     if game.Players.LocalPlayer.Character.Humanoid.Health > 2.6 then
         game.Players.LocalPlayer.Character.Humanoid.Health -= 2.5
         if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy") then
@@ -109,7 +112,7 @@ whiteSpawn.Debug.OnLookAtEntity = function()
     end
 end
 
-whiteSpawn.Debug.OnDeath = function()
+Entity.Debug.OnDeath = function()
     print("Plr Died")
     local Gglitchy = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Glitchy")
     local Gglitch1 = Gglitchy["Glitch Screen"].Glitch1
@@ -171,5 +174,5 @@ whiteSpawn.Debug.OnDeath = function()
     end)
 end
 -- hi hello hi
---Spawner.runEntity(whiteSpawn)
+--Spawner.runEntity(Entity)
 -- oof says hello to you uwu:3
