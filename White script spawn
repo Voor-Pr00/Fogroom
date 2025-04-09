@@ -1,7 +1,7 @@
 local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/DoorSuff/main/OtherSuff/DoorEntitySpawn%2BSource"))()
 -- Create entity
 
-local Entity = Spawner.createEntity({
+local Entity = Creator.createEntity({
     CustomName = "WH1T3", -- Custom name of your entity
     Model = "16735149732", -- Can be GitHub file or rbxassetid
     Speed = 200, -- Percentage, 100 = default Rush speed
