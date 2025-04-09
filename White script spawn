@@ -1,3 +1,5 @@
+local debug_mode = true
+
 local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/DoorSuff/main/OtherSuff/DoorEntitySpawn%2BSource"))()
 -- Create entity
 
