@@ -1,5 +1,3 @@
-local debug_mode = true
-
 local Creator = loadstring(game:HttpGet("https://raw.githubusercontent.com/MuhXd/DoorSuff/main/OtherSuff/DoorEntitySpawn%2BSource"))()
 -- Create entity
 
@@ -56,8 +54,8 @@ local Entity = Creator.createEntity({
 })
 
 
------[[  Debug -=- Advanced  ]]-----
-whiteSpawn.Debug.OnEntitySpawned = function()
+-----[[  Advanced  ]]-----
+Entity.Debug.OnEntitySpawned = function()
     --print("Entity has spawned:", entityTable)
 end
 
@@ -175,6 +173,5 @@ Entity.Debug.OnDeath = function()
         end
     end)
 end
--- hi hello hi
---Spawner.runEntity(Entity)
--- oof says hello to you uwu:3
+-- Run the created entity
+--Creator.runEntity(Entity)
