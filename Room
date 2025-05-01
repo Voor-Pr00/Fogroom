@@ -1,0 +1,11 @@
+local Lighting = game:GetService("Lighting")
+local tweenservice = game:GetService("TweenService")
+
+Lighting.Ambient = Color3.new(0, 0, 0)
+Lighting.Brightness = 0.1
+Lighting.FogStart = 0
+Lighting.FogColor = Color3.new(1, 1, 1)
+
+tweenservice:Create(Lighting,TweenInfo.new(5,Enum.EasingStyle.Linear),{FogEnd = 45}):Play()
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+tweenservice:Create(Lighting,TweenInfo.new(10,Enum.EasingStyle.Linear),{FogEnd = 9990}):Play()
