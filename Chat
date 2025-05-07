@@ -1,3 +1,3 @@
 local prefix = "[Door]: "
 local msg = "Impossible mode v1.8"
-game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='#965aff'>{prefix..msg}</font>`)
+game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='#90ee90'>{prefix..msg}</font>`)
