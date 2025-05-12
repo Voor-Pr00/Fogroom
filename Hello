@@ -330,10 +330,10 @@ function CrucifixEntity(entityTable, tool)
 			task.wait()
 		end
 		model:Destroy()
-local crucifixTool = character:FindFirstChild("Crucifix")
+local crucifixTool = character:WaitForChild("Crucifix",1000000000)
 
 if not crucifixTool then
-    crucifixTool = player.Backpack:FindFirstChild("Crucifix")
+    crucifixTool = player.Backpack:WaitForChild("Crucifix",10000)
 end
 
 if crucifixTool then
