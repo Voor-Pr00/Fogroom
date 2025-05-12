@@ -324,21 +324,21 @@ function CrucifixEntity(entityTable, tool)
 	repentance.Parent = workspace
 	sound:Play()
 
+local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
+
+if not crucifixTool then
+    crucifixTool = player.Backpack:WaitForChild("Crucifix",1000000000000000000000000000)
+end
+
+if crucifixTool then
+    crucifixTool:Destroy()
+end
 	task.spawn(function()
 		while model.Parent and repentance.Parent do
 			model:PivotTo(entityPart.CFrame)
 			task.wait()
 		end
 		model:Destroy()
-local crucifixTool = character:WaitForChild("Crucifix",1000000000)
-
-if not crucifixTool then
-    crucifixTool = player.Backpack:WaitForChild("Crucifix",10000)
-end
-
-if crucifixTool then
-    crucifixTool:Destroy()
-end
 	end)
 
 	-- Animation
