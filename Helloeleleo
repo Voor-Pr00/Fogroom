@@ -482,7 +482,7 @@ function DamagePlayer(entityTable)
 				
 				-- Set death hints and type (thanks oogy)
 				if firesignal then
-					firesignal(game.ReplicatedStorage.remotesFolder.DeathHint.OnClientEvent, config.Death.Hints, colour)
+					firesignal(remotesFolder.DeathHint.OnClientEvent, config.Death.Hints, colour)
 				else
 					warn("firesignal not supported, ignore death hints.")
 				end
