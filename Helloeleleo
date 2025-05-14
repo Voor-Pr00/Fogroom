@@ -356,7 +356,7 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("RepentanceNEW", 1000) then
+if game.Workspace:WaitForChild("CommonSense") then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
 ---====== Display achievement ======---
