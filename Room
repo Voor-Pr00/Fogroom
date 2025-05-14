@@ -1070,7 +1070,3 @@ if not vynixu_SpawnerLoaded then
 		end
 	end)
 end
-
--- Return spawner
-getgenv().VynixuEntitySpawnerV2 = spawner
-return spawner
