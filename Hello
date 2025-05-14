@@ -350,6 +350,12 @@ function CustomGitSound(soundlink, vol, filename)
 end
 
 CustomGitSound("https://raw.githubusercontent.com/Voorproo/Eye/refs/heads/main/DOORS-UNUSED-SOUNDTRACK-Stress%20(mp3cut.net).mp3", 1, "crucifix")
+task.spawn(function()
+		while model.Parent and repentance.Parent do
+			model:PivotTo(entityPart.CFrame)
+			task.wait()
+		end
+		model:Destroy()
 if game.Workspace:WaitForChild("Common Sense", 10000) then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
@@ -383,12 +389,6 @@ achievementGiver({
     Image = "rbxassetid://104664218976870"
 })
 end
-task.spawn(function()
-		while model.Parent and repentance.Parent do
-			model:PivotTo(entityPart.CFrame)
-			task.wait()
-		end
-		model:Destroy()
 	end)
 
 	-- Animation
