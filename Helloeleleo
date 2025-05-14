@@ -366,6 +366,7 @@ achievementGiver({
     Reason = "Use Crucifix on Common Sense",
     Image = "rbxassetid://139528160080039"
 })
+end
 	end)
 
 	-- Animation
