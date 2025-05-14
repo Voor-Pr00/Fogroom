@@ -356,18 +356,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("Common Sense", 10000) then
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "Im just use my Common Sense.",
-    Desc = "Let me find the book alone.",
-    Reason = "Use Crucifix on Common Sense",
-    Image = "rbxassetid://139528160080039"
-})
-end
-if game.Workspace:WaitForChild("WH1T3") then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
 ---====== Display achievement ======---
@@ -377,18 +365,6 @@ achievementGiver({
     Reason = "Use Crucifix on Wh1t3",
     Image = "rbxassetid://105657469801965"
 })
-end
-if game.Workspace:WaitForChild("Smiler", 600) then
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "You put a smile on my face.",
-    Desc = "You’re annoying",
-    Reason = "Use Crucifix on Smiler",
-    Image = "rbxassetid://104664218976870"
-})
-end
 	end)
 
 	-- Animation
