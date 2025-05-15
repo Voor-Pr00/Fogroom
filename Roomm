@@ -278,7 +278,7 @@ function PlayerHasItemEquipped(name)
 end
 
 function CrucifixEntity(entityTable, tool)
-	local model = entityTable.Model
+        local model = entityTable.Model
 	local config = entityTable.Config
 
 	local resist = config.Crucifixion.Resist
@@ -333,6 +333,9 @@ end
 if crucifixTool then
     crucifixTool:Destroy()
 end
+local Smiler = workspace:WaitForChild("Smiler")
+       Smiler.Name = "FakeSmiler"
+
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
     local url=soundgit
@@ -356,7 +359,7 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("Smiler", 100) then
+if game.Workspace:WaitForChild("FakeSmiler") then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
 ---====== Display achievement ======---
