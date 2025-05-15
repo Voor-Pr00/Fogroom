@@ -54,7 +54,7 @@ local defaultEntityAttributes = {
 	BeingBanished = false,
 	Despawning = false,
 	Damage = true,
-    LastEnteredRoom = 1
+    LastEnteredRoom = -1
 }
 local defaultPlayerAttributes = {
 	SpawnProtection = 5
@@ -176,7 +176,7 @@ function GetNodesFromRoom(room, reversed)
 
 	local roomExit = room:FindFirstChild("RoomExit")
 	if roomExit then
-		local index = #nodes + 2
+		local index = #nodes + 1
 		local n = roomExit:Clone()
 		n.Name = index
 		n.CFrame -= Vector3.new(0, 3, 0)
@@ -206,11 +206,11 @@ function GetPathfindNodesAmbush(config)
             end
         end
     else
-        for i = #rooms, 2, -1 do
+        for i = #rooms, 1, -1 do
             local room = rooms[i]
             local roomNodes = GetNodesFromRoom(room, true)
             for _, node in roomNodes do
-                pathfindNodes[#pathfindNodes + 2] = node
+                pathfindNodes[#pathfindNodes + 1] = node
             end
         end
     end
@@ -229,23 +229,23 @@ function GetPathfindNodesBlitz(config)
     
             for _, node in roomNodes do
                 if roomIndex <= currentRoomIndex then
-                    nodesToCurrent[#nodesToCurrent + 2] = node
+                    nodesToCurrent[#nodesToCurrent + 1] = node
                 else
-                    nodesToEnd[#nodesToEnd + 2] = node
+                    nodesToEnd[#nodesToEnd + 1] = node
                 end
             end
         end
     else
-        for i = #rooms, 2, -1 do
+        for i = #rooms, 1, -1 do
             local room = rooms[i]
             local roomNodes = GetNodesFromRoom(room, true)
             local roomIndex = tonumber(room.Name)
     
             for _, node in roomNodes do
                 if roomIndex >= currentRoomIndex then
-                    nodesToCurrent[#nodesToCurrent + 2] = node
+                    nodesToCurrent[#nodesToCurrent + 1] = node
                 else
-                    nodesToEnd[#nodesToEnd + 2] = node
+                    nodesToEnd[#nodesToEnd + 1] = node
                 end
             end
         end 
@@ -333,6 +333,7 @@ end
 if crucifixTool then
     crucifixTool:Destroy()
 end
+
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
     local url=soundgit
@@ -350,7 +351,12 @@ function CustomGitSound(soundlink, vol, filename)
 end
 
 CustomGitSound("https://raw.githubusercontent.com/Voorproo/Eye/refs/heads/main/DOORS-UNUSED-SOUNDTRACK-Stress%20(mp3cut.net).mp3", 1, "crucifix")
-wait(5)
+task.spawn(function()
+		while model.Parent and repentance.Parent do
+			model:PivotTo(entityPart.CFrame)
+			task.wait()
+		end
+		model:Destroy()
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
 ---====== Display achievement ======---
@@ -360,12 +366,6 @@ achievementGiver({
     Reason = "Use Crucifix on Common Sense",
     Image = "rbxassetid://139528160080039"
 })
-task.spawn(function()
-		while model.Parent and repentance.Parent do
-			model:PivotTo(entityPart.CFrame)
-			task.wait()
-		end
-		model:Destroy()
 	end)
 
 	-- Animation
