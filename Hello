@@ -333,8 +333,6 @@ end
 if crucifixTool then
     crucifixTool:Destroy()
 end
-local white = workspace:WaitForChild("WH1T3")
-white.Name = "FakeWH1T3"
 
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
@@ -359,8 +357,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-wait(3)
-if game.Workspace:WaitForChild("FakeWH1T3") then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
 ---====== Display achievement ======---
