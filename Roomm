@@ -333,8 +333,6 @@ end
 if crucifixTool then
     crucifixTool:Destroy()
 end
-local Smiler = workspace:WaitForChild("Smiler")
-       Smiler.Name = "FakeSmiler"
 
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
@@ -359,6 +357,9 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
+local Smiler = workspace:WaitForChild("Smiler")
+       Smiler.Name = "FakeSmiler"
+
 if game.Workspace:WaitForChild("FakeSmiler") then
 local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
 
