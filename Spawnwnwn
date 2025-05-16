@@ -370,6 +370,7 @@ achievementGiver({
     Reason = "Use Crucifix on Bloopies",
     Image = "rbxassetid://140025774897017"
 })
+end
 	end)
 
 	-- Animation
