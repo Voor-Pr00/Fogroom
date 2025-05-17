@@ -324,9 +324,6 @@ function CrucifixEntity(entityTable, tool)
 	repentance.Parent = workspace
 	sound:Play()
 
-local Bloopies = workspace:WaitForChild("Bloppies")
-Bloopies.Name = "FakeBloppies"
-
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
 
 if not crucifixTool then
@@ -360,17 +357,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("FakeBloppies") then
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "Nightmare Is Gone",
-    Desc = "WHY?",
-    Reason = "Use Crucifix on Bloopies",
-    Image = "rbxassetid://140025774897017"
-})
-end
 	end)
 
 	-- Animation
