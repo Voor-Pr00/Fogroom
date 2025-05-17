@@ -333,8 +333,6 @@ end
 if crucifixTool then
     crucifixTool:Destroy()
 end
-local common = workspace:WaitForChild("Common Sense")
-common.Name = "FakeCommonSense"
 
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
@@ -359,17 +357,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("FakeCommonSense") then
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "Im just use my Common Sense.",
-    Desc = "Let me find the book alone.",
-    Reason = "Use Crucifix on Common Sense",
-    Image = "rbxassetid://139528160080039"
-})
-end
 	end)
 
 	-- Animation
