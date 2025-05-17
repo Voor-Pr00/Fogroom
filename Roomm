@@ -357,17 +357,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-if game.Workspace:WaitForChild("Smiler") then
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "You put a smile on my face.",
-    Desc = "You’re annoying",
-    Reason = "Use Crucifix on Smiler",
-    Image = "rbxassetid://104664218976870"
-})
-end
 	end)
 
 	-- Animation
