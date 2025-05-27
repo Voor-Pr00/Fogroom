@@ -322,7 +322,6 @@ function CrucifixEntity(entityTable, tool)
 	repentance.Entity.CFrame = entityPivot
     crucifix.BodyPosition.Position = (localCollision.CFrame * CFrame.new(0.5, 3, -6)).Position
 	repentance.Parent = workspace
-	sound:Play()
 
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
 
@@ -357,15 +356,6 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
-
----====== Display achievement ======---
-achievementGiver({
-    Title = "Who kills who now",
-    Desc = "You don’t want crash game today?",
-    Reason = "Use Crucifix on Wh1t3",
-    Image = "rbxassetid://105657469801965"
-})
 	end)
 
 	-- Animation
