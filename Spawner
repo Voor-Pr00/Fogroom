@@ -325,6 +325,7 @@ function CrucifixEntity(entityTable, tool)
 	sound:Play()
 game.Workspace.RepentanceNEW.Crucifix.Sound.Volume = 0
 game.Workspace.RepentanceNEW.Crucifix.Color = Color3.fromRGB(255, 0, 0)
+game.Workspace.RepentanceNEW.Crucifix.ExplodeParticle.Brightness = 0.1
 
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
 
@@ -348,7 +349,7 @@ function CustomGitSound(soundlink, vol, filename)
     local sound = Instance.new("Sound")
     sound.SoundId = GitAud(soundlink, filename)
     sound.Parent = workspace
-    sound.Volume = 3
+    sound.Volume = 2.5
    sound:Play()
 end
 
@@ -369,11 +370,11 @@ task.spawn(function()
 	task.spawn(function()
 		waitUntil(2.625)
 		TweenService:Create(pentagram.Base.LightAttach.LightBright, TweenInfo.new(1.5, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
-			Brightness = 5,
+			Brightness = 1,
 			Range = 40
 		}):Play()
 		TweenService:Create(crucifix.Light, TweenInfo.new(1.5, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
-			Brightness = 11.25,
+			Brightness = 0.5,
 			Range = 30
 		}):Play()
 		task.wait(1.5)
@@ -387,7 +388,7 @@ task.spawn(function()
 		}):Play()
 
 		if resist == false then
-			TweenService:Create(crucifix.Light, TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), { Brightness = 15, Range = 40 }):Play()
+			TweenService:Create(crucifix.Light, TweenInfo.new(1, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), { Brightness = 0.5, Range = 40 }):Play()
 			shaker:StartFadeOut(3)
 			fadeOut()
 			TweenService:Create(crucifix.BodyAngularVelocity, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), { AngularVelocity = Vector3.new() }):Play()
