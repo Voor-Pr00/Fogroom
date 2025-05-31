@@ -323,7 +323,7 @@ function CrucifixEntity(entityTable, tool)
     crucifix.BodyPosition.Position = (localCollision.CFrame * CFrame.new(0.5, 3, -6)).Position
 	repentance.Parent = workspace
 	sound:Play()
-game.Workspace.RepentanceNEW.Crucifix.Sound:Destroy()
+game.Workspace.RepentanceNEW.Crucifix.Sound.Volume = 0.1
 game.Workspace.RepentanceNEW.Crucifix.Color = Color3.fromRGB(255, 0, 0)
 
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
