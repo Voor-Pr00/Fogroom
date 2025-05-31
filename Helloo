@@ -323,7 +323,6 @@ function CrucifixEntity(entityTable, tool)
     crucifix.BodyPosition.Position = (localCollision.CFrame * CFrame.new(0.5, 3, -6)).Position
 	repentance.Parent = workspace
 	sound:Play()
-game.Workspace.RepentanceNEW.Crucifix.Sound:Destroy()
 game.Workspace.RepentanceNEW.Crucifix.Color = Color3.fromRGB(255, 0, 0)
 
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
@@ -416,7 +415,7 @@ achievementGiver({
 		shaker:StartFadeOut(3)
 		task.spawn(function()
 			local color = Instance.new("Color3Value")
-			color.Value = Color3.fromRGB(137, 207, 255)
+			color.Value = Color3.fromRGB(255, 0, 0)
 
 			local tween = TweenService:Create(color, TweenInfo.new(0.5, Enum.EasingStyle.Sine), { Value = Color3.fromRGB(255, 116, 130) })
 			tween:Play()
