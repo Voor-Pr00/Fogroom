@@ -379,11 +379,11 @@ achievementGiver({
 	task.spawn(function()
 		waitUntil(2.625)
 		TweenService:Create(pentagram.Base.LightAttach.LightBright, TweenInfo.new(1.5, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
-			Brightness = 5,
+			Brightness = 3,
 			Range = 40
 		}):Play()
 		TweenService:Create(crucifix.Light, TweenInfo.new(1.5, Enum.EasingStyle.Circular, Enum.EasingDirection.InOut), {
-			Brightness = 11.25,
+			Brightness = 1,
 			Range = 30
 		}):Play()
 		task.wait(1.5)
