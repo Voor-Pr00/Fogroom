@@ -326,13 +326,6 @@ function CrucifixEntity(entityTable, tool)
 game.Workspace.RepentanceNEW.Crucifix.Sound:Destroy()
 game.Workspace.RepentanceNEW.Crucifix.Color = Color3.fromRGB(255, 0, 0)
 
-for _, part in pairs(game.Workspace.RepentanceNEW.Pentagram:GetDescendants()) do
-    if part:IsA("BasePart") then
-        part.Color = Color3.fromRGB(255, 0, 0) -- màu xanh nước biển đậm
-    end
-end
-
-
 local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
 
 if not crucifixTool then
