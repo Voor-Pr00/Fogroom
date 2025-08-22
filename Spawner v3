@@ -525,9 +525,10 @@ function FixRoomLights(room)
 
 local Lighh = config.Light.Color
 		if not Lighh then
+local r,g,b = cfg.Color[1], cfg.Color[2], cfg.Color[3]
 			game.Lighting.Ambient = Color3.fromRGB(65,65,65)
 else
-            game.Lighting.Ambient = Color3.fromRGB(Lighh[1], Lighh[2], Lighh[3])
+            game.Lighting.Ambient = Color3.fromRGB(r, g, b)
 			end
 
     -- Fix lights
