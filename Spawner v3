@@ -117,6 +117,9 @@ local defaultConfig = {
 		Resist = false,
 		Break = true
 	},
+    Light = {
+       Color = {0, 0, 0}
+},
 	Death = {
 		Type = "Guiding", -- "Curious"
 		Hints = {"Death", "Hints", "Go", "Here"},
@@ -519,6 +522,13 @@ function FixRoomLights(room)
     
     -- Set room ambient
     require(ReplicatedStorage.ClientModules.Module_Events).toggle(room, true, ambientStorage[room])
+
+local Lighh = config.Light.Color
+		if not Lighh then
+			game.Lighting.Ambient = Color3.fromRGB(65,65,65)
+else
+            game.Lighting.Ambient = Color3.fromRGB(Lighh[1], Lighh[2], Lighh[3])
+			end
 
     -- Fix lights
     local stuff = {}
