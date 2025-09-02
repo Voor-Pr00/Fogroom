@@ -523,14 +523,6 @@ function FixRoomLights(room)
     -- Set room ambient
     require(ReplicatedStorage.ClientModules.Module_Events).toggle(room, true, ambientStorage[room])
 
-local Lighh = config.Light.Color
-local r,g,b = config.Light.Color[1], config.Light.Color[2], config.Light.Color[3]
-		if not Lighh then
-			game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(255, 0, 0)
-else
-            game.Lighting.MainColorCorrection.TintColor = Color3.fromRGB(r, g, b)
-			end
-
     -- Fix lights
     local stuff = {}
     for _, d in room:GetDescendants() do
