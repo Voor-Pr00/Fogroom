@@ -110,6 +110,29 @@ local defaultConfig = {
 		Values = {1.5, 20, 0.1, 1}, -- Magnitude, Roughness, FadeIn, FadeOut
 		Range = 100
 	},
+Achievements = {
+	    Crucifix = {
+	        Enabled = true,
+	        Once = true,
+	        Title = "Crucifix Title",
+	        Desc = "Crucifix Description",
+	        Reason = "Crucifix Reason",
+	        Image = "rbxassetid://12309073114",
+	        Prize = {
+                Revives = {
+                    Visible = true,
+                    Amount = 1
+                },
+                Knobs = {
+                    Visible = true,
+                    Amount = 100
+                },
+                Stardust = {
+                    Visible = true,
+                    Amount = 20
+                }
+            }
+	    },
 	Crucifixion = {
 		Type = "Curious", -- "Guiding"
 		Enabled = true,
@@ -117,9 +140,6 @@ local defaultConfig = {
 		Resist = false,
 		Break = true
 	},
-    Light = {
-       Color = {0, 0, 0}
-},
 	Death = {
 		Type = "Guiding", -- "Curious"
 		Hints = {"Death", "Hints", "Go", "Here"},
@@ -280,11 +300,44 @@ function PlayerHasItemEquipped(name)
 	return false
 end
 
+function UnlockAchievement(achievement)
+    if not achievement or not achievement.Enabled then return end
+    
+    local title = achievement.Title
+    local prize = achievement.Prize
+    
+    local achievementInfo = {
+        Title = title,
+        Desc = achievement.Desc,
+        Reason = achievement.Reason,
+        Image = achievement.Image,
+        Prize = {}
+    }
+    
+    if prize.Revives.Visible then
+        achievementInfo.Prize.Revives = prize.Revives.Amount
+    end
+    if prize.Knobs.Visible then
+        achievementInfo.Prize.Knobs = prize.Knobs.Amount
+    end
+    if prize.Stardust.Visible then
+        achievementInfo.Prize.Stardust = prize.Stardust.Amount
+    end
+    
+    if not achievement.Once then
+        achievementGiver(achievementInfo)
+    elseif not _G.achievementUnlock[title] then
+        achievementGiver(achievementInfo)
+        _G.achievementUnlock[title] = true
+    end
+end
+
 function CrucifixEntity(entityTable, tool)
         local model = entityTable.Model
 	local config = entityTable.Config
 
 	local resist = config.Crucifixion.Resist
+local crucifixAchievement = config.Achievements.Crucifix
 
 	local toolPivot = tool:GetPivot()
 	local entityPivot = model:GetPivot()
@@ -294,6 +347,10 @@ function CrucifixEntity(entityTable, tool)
 	params.FilterDescendantsInstances = {localChar, model}
 	local result = workspace:Raycast(entityPivot.Position, Vector3.new(0, -1000, 0), params)
 	if not result then return end
+
+if tool and tool.Parent == localChar then
+	    tool:Destroy()
+	end
 
 	-- Setup
 	model:SetAttribute("BeingBanished", true)
@@ -422,6 +479,7 @@ task.spawn(function()
 	if not resist then
 		repentance.Crucifix.ExplodeParticle:Emit(math.random(20, 30))
 		moduleScripts.Main_Game.camShaker:ShakeOnce(7.5, 7.5, 0.25, 1.5)
+UnlockAchievement(crucifixAchievement)
 	else
 		model:SetAttribute("BeingBanished", false)
 		model:SetAttribute("Paused", false)
