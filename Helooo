@@ -292,6 +292,10 @@ function CrucifixEntity(entityTable, tool)
 	local result = workspace:Raycast(entityPivot.Position, Vector3.new(0, -1000, 0), params)
 	if not result then return end
 
+if tool and tool.Parent == localChar then
+	    tool:Destroy()
+	end
+
 	-- Setup
 	model:SetAttribute("BeingBanished", true)
 
@@ -326,16 +330,6 @@ function CrucifixEntity(entityTable, tool)
 game.Workspace.RepentanceNEW.Crucifix.Sound.Volume = 0
 game.Workspace.RepentanceNEW.Crucifix.Color = Color3.fromRGB(33, 27, 124)
 game.Workspace.RepentanceNEW.Crucifix.ExplodeParticle.Brightness = 0.1
-
-local crucifixTool = character:WaitForChild("Crucifix",10000000000000000000000000000000)
-
-if not crucifixTool then
-    crucifixTool = player.Backpack:WaitForChild("Crucifix",1000000000000000000000000000)
-end
-
-if crucifixTool then
-    crucifixTool:Destroy()
-end
 
 function GitAud(soundgit,filename)
     SoundName=tostring(SoundName)
