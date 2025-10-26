@@ -36,12 +36,6 @@ local BaseEntitySpeed = 65
 local colourGuiding = Color3.fromRGB(137, 207, 255)
 local colourCurious = Color3.fromRGB(253, 255, 133)
 
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/Focuslol666/Utilities/refs/heads/patch-1/Doors/Custom%20Achievements/Source.lua"))()
-
-if not _G.achievementUnlock then
-    _G.achievementUnlock = {}
-end
-
 local vynixuModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
 }
@@ -116,29 +110,6 @@ local defaultConfig = {
 		Values = {1.5, 20, 0.1, 1}, -- Magnitude, Roughness, FadeIn, FadeOut
 		Range = 100
 	},
-Achievements = {
-	    Survive = {
-	        Enabled = true,
-	        Once = false,
-	        Title = "Survive Title",
-	        Desc = "Survive Description",
-	        Reason = "Survive Reason",
-	        Image = "rbxassetid://12309073114",
-	        Prize = {
-                Revives = {
-                    Visible = true,
-                    Amount = 1
-                },
-                Knobs = {
-                    Visible = true,
-                    Amount = 100
-                },
-                Stardust = {
-                    Visible = false,
-                    Amount = 20
-                }
-            }
-	    },
 	Crucifixion = {
 		Type = "Curious", -- "Guiding"
 		Enabled = true,
@@ -822,10 +793,6 @@ spawner.Create = function(config)
 					self.Model:Destroy()
 					self.Model = nil
 					task.spawn(self.RunCallback, self, "OnDespawned") -- OnDespawned
-local surviveAchievement = config.Achievements.Survive
-                    if surviveAchievement.Enabled and localHum.Health > 0 then
-                        UnlockAchievement(surviveAchievement)
-				end
 			end
 		}
 		
