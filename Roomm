@@ -36,6 +36,12 @@ local BaseEntitySpeed = 65
 local colourGuiding = Color3.fromRGB(137, 207, 255)
 local colourCurious = Color3.fromRGB(253, 255, 133)
 
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/Focuslol666/Utilities/refs/heads/patch-1/Doors/Custom%20Achievements/Source.lua"))()
+
+if not _G.achievementUnlock then
+    _G.achievementUnlock = {}
+end
+
 local vynixuModules = {
 	Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))()
 }
@@ -110,6 +116,29 @@ local defaultConfig = {
 		Values = {1.5, 20, 0.1, 1}, -- Magnitude, Roughness, FadeIn, FadeOut
 		Range = 100
 	},
+Achievements = {
+	    Survive = {
+	        Enabled = true,
+	        Once = false,
+	        Title = "Survive Title",
+	        Desc = "Survive Description",
+	        Reason = "Survive Reason",
+	        Image = "rbxassetid://12309073114",
+	        Prize = {
+                Revives = {
+                    Visible = true,
+                    Amount = 1
+                },
+                Knobs = {
+                    Visible = true,
+                    Amount = 100
+                },
+                Stardust = {
+                    Visible = false,
+                    Amount = 20
+                }
+            }
+	    },
 	Crucifixion = {
 		Type = "Curious", -- "Guiding"
 		Enabled = true,
@@ -268,6 +297,39 @@ function PlayerInLineOfSight(model, config)
 	end
 	return false
 end
+
+function UnlockAchievement(achievement)
+    if not achievement or not achievement.Enabled then return end
+    
+    local title = achievement.Title
+    local prize = achievement.Prize
+    
+    local achievementInfo = {
+        Title = title,
+        Desc = achievement.Desc,
+        Reason = achievement.Reason,
+        Image = achievement.Image,
+        Prize = {}
+    }
+    
+    if prize.Revives.Visible then
+        achievementInfo.Prize.Revives = prize.Revives.Amount
+    end
+    if prize.Knobs.Visible then
+        achievementInfo.Prize.Knobs = prize.Knobs.Amount
+    end
+    if prize.Stardust.Visible then
+        achievementInfo.Prize.Stardust = prize.Stardust.Amount
+    end
+    
+    if not achievement.Once then
+        achievementGiver(achievementInfo)
+    elseif not _G.achievementUnlock[title] then
+        achievementGiver(achievementInfo)
+        _G.achievementUnlock[title] = true
+    end
+end
+
 
 function PlayerHasItemEquipped(name)
 	local tool = localChar:FindFirstChildOfClass("Tool")
@@ -760,6 +822,9 @@ spawner.Create = function(config)
 					self.Model:Destroy()
 					self.Model = nil
 					task.spawn(self.RunCallback, self, "OnDespawned") -- OnDespawned
+local surviveAchievement = config.Achievements.Survive
+                    if surviveAchievement.Enabled and localHum.Health > 0 then
+                        UnlockAchievement(surviveAchievement)
 				end
 			end
 		}
