@@ -110,6 +110,33 @@ local defaultConfig = {
 		Values = {1.5, 20, 0.1, 1}, -- Magnitude, Roughness, FadeIn, FadeOut
 		Range = 100
 	},
+Jumpscare = {
+        true, -- Enabled/Disabled
+        {
+            Image1 = "rbxassetid://11678966779", -- Image1 url
+            Image2 = "rbxassetid://11678966779", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                5263560896, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+				{ PlaybackSpeed = 0.5 },
+            },
+            Sound2 = {
+                5263560896, -- SoundId
+                { Volume = 0.5 }, -- Sound properties
+				{ PlaybackSpeed = 0.5 },
+            },
+            Flashing = {
+                true, -- Enabled/Disabled
+                Color3.fromRGB(0, 0, 255), -- Color
+            },
+            Tease = {
+                false, -- Enabled/Disabled
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
 	Crucifixion = {
 		Type = "Curious", -- "Guiding"
 		Enabled = true,
@@ -481,12 +508,115 @@ function PlayerIsProtected()
 	return (tick() - lastRespawn) <= localPlayer:GetAttribute("SpawnProtection")
 end
 
+function CreateJumpscare(jumpscareConfig)
+    local image1 = LoadCustomAsset(config.Image1)
+    local image2 = LoadCustomAsset(config.Image2)
+    local sound1, sound2 = nil, nil
+
+    Char:SetPrimaryPartCFrame(CFrame.new(0, 9e9, 0))
+
+    -- UI Construction
+
+    local JumpscareGui = Instance.new("ScreenGui")
+    local Background = Instance.new("Frame")
+    local Face = Instance.new("ImageLabel")
+
+    JumpscareGui.Name = "JumpscareGui"
+    JumpscareGui.IgnoreGuiInset = true
+    JumpscareGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    Background.Name = "Background"
+    Background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Background.BorderSizePixel = 0
+    Background.Size = UDim2.new(1, 0, 1, 0)
+    Background.ZIndex = 999
+
+    Face.Name = "Face"
+    Face.AnchorPoint = Vector2.new(0.5, 0.5)
+    Face.BackgroundTransparency = 1
+    Face.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Face.ResampleMode = Enum.ResamplerMode.Pixelated
+    Face.Size = UDim2.new(0, 150, 0, 150)
+    Face.Image = image1
+
+    Face.Parent = Background
+    Background.Parent = JumpscareGui
+    JumpscareGui.Parent = CG
+
+    -- Tease
+
+    if config.Tease[1] then
+        if typeof(config.Sound1) == "table" then
+            sound1 = playSound(config.Sound1[1], config.Sound1[2])
+        end
+
+        local rdmTease = math.random(config.Tease.Min, config.Tease.Max)
+
+        for _ = config.Tease.Min, rdmTease do
+            task.wait(math.random(100, 200) / 100)
+
+            local growFactor = (MaxTeaseSize - MinTeaseSize) / rdmTease
+            Face.Size = UDim2.new(0, Face.AbsoluteSize.X + growFactor, 0, Face.AbsoluteSize.Y + growFactor)
+        end
+        
+        task.wait(math.random(100, 200) / 100)
+    end
+
+    -- Scare
+
+    if config.Flashing[1] then
+        task.spawn(function()
+            while JumpscareGui.Parent do
+                Background.BackgroundColor3 = config.Flashing[2]
+                task.wait(math.random(25, 100) / 1000)
+                Background.BackgroundColor3 = Color3.new(0, 0, 0)
+                task.wait(math.random(25, 100) / 1000)
+            end
+        end)
+    end
+
+    if config.Shake then
+        task.spawn(function()
+            local origin = Face.Position
+
+            while JumpscareGui.Parent do
+                Face.Position = origin + UDim2.new(0, math.random(-10, 10), 0, math.random(-10, 10))
+                Face.Rotation = math.random(-5, 5)
+
+                task.wait()
+            end
+        end)
+    end
+
+    if typeof(config.Sound2) == "table" then
+        sound2 = playSound(config.Sound2[1], config.Sound2[2])
+    end
+
+    Face.Image = image2
+    Face.Size = UDim2.new(0, 750, 0, 750)
+
+    TS:Create(Face, TweenInfo.new(0.75), { Size = UDim2.new(0, 2000, 0, 2000), ImageTransparency = 0.5 }):Play()
+    task.wait(0.75)
+    JumpscareGui:Destroy()
+
+    if sound1 then
+        sound1:Stop()
+    end
+
+    if sound2 then
+        sound2:Stop()
+    end
+end
+
 function DamagePlayer(entityTable)
 	if localHum.Health > 0 and not PlayerIsProtected() then
 		local config = entityTable.Config
 		local newHealth = math.clamp(localHum.Health - config.Damage.Amount, 0, localHum.MaxHealth)
 
 		if newHealth == 0 then
+if config.Jumpscare.Enabled then
+				CreateJumpscare(config.Jumpscare)
+			end
 			-- Death hints
 			if #config.Death.Hints > 0 then
 				-- Get death type
