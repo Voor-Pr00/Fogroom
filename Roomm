@@ -110,33 +110,6 @@ local defaultConfig = {
 		Values = {1.5, 20, 0.1, 1}, -- Magnitude, Roughness, FadeIn, FadeOut
 		Range = 100
 	},
-Jumpscare = {
-        true, -- Enabled/Disabled
-        {
-            Image1 = "rbxassetid://11678966779", -- Image1 url
-            Image2 = "rbxassetid://11678966779", -- Image2 url
-            Shake = true,
-            Sound1 = {
-                5263560896, -- SoundId
-                { Volume = 0.5 }, -- Sound properties
-				{ PlaybackSpeed = 0.5 },
-            },
-            Sound2 = {
-                5263560896, -- SoundId
-                { Volume = 0.5 }, -- Sound properties
-				{ PlaybackSpeed = 0.5 },
-            },
-            Flashing = {
-                true, -- Enabled/Disabled
-                Color3.fromRGB(0, 0, 255), -- Color
-            },
-            Tease = {
-                false, -- Enabled/Disabled
-                Min = 1,
-                Max = 3,
-            },
-        },
-    },
 	Crucifixion = {
 		Type = "Curious", -- "Guiding"
 		Enabled = true,
@@ -295,39 +268,6 @@ function PlayerInLineOfSight(model, config)
 	end
 	return false
 end
-
-function UnlockAchievement(achievement)
-    if not achievement or not achievement.Enabled then return end
-    
-    local title = achievement.Title
-    local prize = achievement.Prize
-    
-    local achievementInfo = {
-        Title = title,
-        Desc = achievement.Desc,
-        Reason = achievement.Reason,
-        Image = achievement.Image,
-        Prize = {}
-    }
-    
-    if prize.Revives.Visible then
-        achievementInfo.Prize.Revives = prize.Revives.Amount
-    end
-    if prize.Knobs.Visible then
-        achievementInfo.Prize.Knobs = prize.Knobs.Amount
-    end
-    if prize.Stardust.Visible then
-        achievementInfo.Prize.Stardust = prize.Stardust.Amount
-    end
-    
-    if not achievement.Once then
-        achievementGiver(achievementInfo)
-    elseif not _G.achievementUnlock[title] then
-        achievementGiver(achievementInfo)
-        _G.achievementUnlock[title] = true
-    end
-end
-
 
 function PlayerHasItemEquipped(name)
 	local tool = localChar:FindFirstChildOfClass("Tool")
