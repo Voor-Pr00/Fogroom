@@ -9,7 +9,7 @@
             |___/                                                   |___/         |_|
 ]]--
 
-if VynixuEntitySpawnerV2 then return VynixuEntitySpawnerV2 end
+if VynixuEntitySpawnerV2 then end
 
 -- Services
 local Players = game:GetService("Players")
@@ -760,6 +760,7 @@ spawner.Create = function(config)
 					self.Model:Destroy()
 					self.Model = nil
 					task.spawn(self.RunCallback, self, "OnDespawned") -- OnDespawned
+				end
 			end
 		}
 		
