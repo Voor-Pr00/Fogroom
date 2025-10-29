@@ -813,7 +813,6 @@ function CreateJumpscare(jumpscareConfig)
         sound2:Stop()
     end
 end
-end
 
 function DamagePlayer(entityTable)
 	if localHum.Health > 0 and not PlayerIsProtected() then
