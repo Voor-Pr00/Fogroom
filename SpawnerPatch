@@ -149,15 +149,30 @@ local defaultConfig = {
 		Range = 100
 	},
 	Jumpscare = {
-	    Enabled = false,
-	    Face = "rbxassetid://0",
-	    FacePosition = UDim2.new(0.5, 0, 0.5, 0),
-	    FaceSize = UDim2.new(0, 150, 0, 150),
-	    BackgroundColor = Color3.new(1, 1, 1), -- Color3.fromRGB
-	    BackgroundColor2 = Color3.new(0, 0, 0), -- Color3.fromRGB
-	    Sound = "rbxassetid://0",
-	    SoundVolume = 5
-	},
+        true, -- Enabled ('false' if you don't want jumpscare)
+        {
+            Image1 = "rbxassetid://11417375410", -- Image1 url
+            Image2 = "rbxassetid://11417375410", -- Image2 url
+            Shake = true,
+            Sound1 = {
+                5263560566, -- SoundId
+                { Volume = 2.1 }, -- Sound properties
+            },
+            Sound2 = {
+                5263560566, -- SoundId
+                { Volume = 2.1 }, -- Sound properties
+            },
+            Flashing = {
+                true, -- Enabled
+                Color3.fromRGB(255, 0, 0), -- Color
+            },
+            Tease = {
+                false, -- Enabled ('false' if you don't want tease)
+                Min = 1,
+                Max = 3,
+            },
+        },
+    },
 	Achievements = {
 	    Survive = {
 	        Enabled = true,
@@ -700,19 +715,24 @@ function PlayerIsProtected()
 end
 
 function CreateJumpscare(jumpscareConfig)
+    local image1 = LoadCustomAsset(jumpscareConfig.Image1)
+    local image2 = LoadCustomAsset(jumpscareConfig.Image2)
+    local sound1, sound2 = nil, nil
+
+    Char:SetPrimaryPartCFrame(CFrame.new(0, 9e9, 0))
+
+    -- UI Construction
+
     local JumpscareGui = Instance.new("ScreenGui")
     local Background = Instance.new("Frame")
     local Face = Instance.new("ImageLabel")
-    local scareSound = Instance.new("Sound")
-    
+
     JumpscareGui.Name = "JumpscareGui"
     JumpscareGui.IgnoreGuiInset = true
     JumpscareGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    JumpscareGui.Parent = playerGui
-    JumpscareGui.Enabled = true
 
     Background.Name = "Background"
-    Background.BackgroundColor3 = jumpscareConfig.BackgroundColor
+    Background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     Background.BorderSizePixel = 0
     Background.Size = UDim2.new(1, 0, 1, 0)
     Background.ZIndex = 999
@@ -720,39 +740,79 @@ function CreateJumpscare(jumpscareConfig)
     Face.Name = "Face"
     Face.AnchorPoint = Vector2.new(0.5, 0.5)
     Face.BackgroundTransparency = 1
-    Face.Position = jumpscareConfig.FacePosition
+    Face.Position = UDim2.new(0.5, 0, 0.5, 0)
     Face.ResampleMode = Enum.ResamplerMode.Pixelated
-    Face.Size = jumpscareConfig.FaceSize
-    Face.Image = jumpscareConfig.Face
-    Face.ImageTransparency = 1
+    Face.Size = UDim2.new(0, 150, 0, 150)
+    Face.Image = image1
 
-    scareSound.Name = "Scare"
-    scareSound.SoundId = jumpscareConfig.Sound
-    scareSound.Volume = jumpscareConfig.SoundVolume
-    scareSound.Parent = JumpscareGui
-
-    Background.Parent = JumpscareGui
     Face.Parent = Background
-	
-	task.spawn(function()
-		local startTime = tick()
-		while tick() - startTime < 0.8 do
-			Background.BackgroundColor3 = jumpscareConfig.BackgroundColor
-			task.wait(math.random(25, 100) / 1000)
-			Background.BackgroundColor3 = jumpscareConfig.BackgroundColor2
-			task.wait(math.random(25, 100) / 1000)
-		end
-	end)
+    Background.Parent = JumpscareGui
+    JumpscareGui.Parent = CG
 
-	Face.ImageTransparency = 0
-	TweenService:Create(Face, TweenInfo.new(0.7), {
-		Size = UDim2.new(0, 2450, 0, 1550),
-	}):Play()
-	scareSound:Play()
-	
-	task.delay(0.8, function()
-		JumpscareGui:Destroy()
-	end)
+    -- Tease
+
+    if jumpscareConfig.Tease[1] then
+        if typeof(jumpscareConfig.Sound1) == "table" then
+            sound1 = playSound(jumpscareConfig.Sound1[1], jumpscareConfig.Sound1[2])
+        end
+
+        local rdmTease = math.random(jumpscareConfig.Tease.Min, jumpscareConfig.Tease.Max)
+
+        for _ = jumpscareConfig.Tease.Min, rdmTease do
+            task.wait(math.random(100, 200) / 100)
+
+            local growFactor = (MaxTeaseSize - MinTeaseSize) / rdmTease
+            Face.Size = UDim2.new(0, Face.AbsoluteSize.X + growFactor, 0, Face.AbsoluteSize.Y + growFactor)
+        end
+        
+        task.wait(math.random(100, 200) / 100)
+    end
+
+    -- Scare
+
+    if jumpscareConfig.Flashing[1] then
+        task.spawn(function()
+            while JumpscareGui.Parent do
+                Background.BackgroundColor3 = jumpscareConfig.Flashing[2]
+                task.wait(math.random(25, 100) / 1000)
+                Background.BackgroundColor3 = Color3.new(0, 0, 0)
+                task.wait(math.random(25, 100) / 1000)
+            end
+        end)
+    end
+
+    if jumpscareConfig.Shake then
+        task.spawn(function()
+            local origin = Face.Position
+
+            while JumpscareGui.Parent do
+                Face.Position = origin + UDim2.new(0, math.random(-10, 10), 0, math.random(-10, 10))
+                Face.Rotation = math.random(-5, 5)
+
+                task.wait()
+            end
+        end)
+    end
+
+    if typeof(jumpscareConfig.Sound2) == "table" then
+        sound2 = playSound(jumpscareConfig.Sound2[1], jumpscareConfig.Sound2[2])
+    end
+
+    Face.Image = image2
+    Face.Size = UDim2.new(0, 750, 0, 750)
+
+    TS:Create(Face, TweenInfo.new(0.75), { Size = UDim2.new(0, 2000, 0, 2000), ImageTransparency = 0.5 }):Play()
+    task.wait(0.75)
+    JumpscareGui:Destroy()
+
+    if sound1 then
+        sound1:Stop()
+    end
+
+    if sound2 then
+        sound2:Stop()
+    end
+end
 end
 
 function DamagePlayer(entityTable)
