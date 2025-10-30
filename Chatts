@@ -1,0 +1,9 @@
+local prefix = ""
+local msg = "Impossible mode v1.8"
+game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='#00ff00'>{prefix..msg}</font>`)
+local prefix2 = ""
+local msg2 = "[Oof's Impossible Mode]: Script succesfully executed"
+game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='#00ff00'>{prefix2..msg2}</font>`)
+local prefix3 = ""
+local msg3 = "SCRIPT VERSION: MULTIPLAYER (v1.4)"
+game.TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='#00ff00'>{prefix3..msg3}</font>`)
