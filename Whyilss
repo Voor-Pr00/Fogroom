@@ -337,23 +337,6 @@ if crucifixTool then
     crucifixTool:Destroy()
 end
 
-function GitAud(soundgit,filename)
-    SoundName=tostring(SoundName)
-    local url=soundgit
-    local FileName = filename
-    writefile(FileName..".mp3", game:HttpGet(url))
-    return (getcustomasset or getsynasset)(FileName..".mp3")
-end
-
-function CustomGitSound(soundlink, vol, filename)
-    local sound = Instance.new("Sound")
-    sound.SoundId = GitAud(soundlink, filename)
-    sound.Parent = workspace
-    sound.Volume = 2.5
-   sound:Play()
-end
-
-CustomGitSound("https://raw.githubusercontent.com/Voor-Pr00/Eye/refs/heads/main/DOORS-UNUSED-SOUNDTRACK-Stress%20(mp3cut.net).mp3", 1, "crucifix")
 task.spawn(function()
 		while model.Parent and repentance.Parent do
 			model:PivotTo(entityPart.CFrame)
