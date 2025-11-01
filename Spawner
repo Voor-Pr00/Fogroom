@@ -9,7 +9,7 @@
             |___/                                                   |___/         |_|
 ]]--
 
-if VynixuEntitySpawnerV2 then return VynixuEntitySpawnerV2 end
+if VynixuEntitySpawnerV4 then return VynixuEntitySpawnerV4 end
 
 -- Services
 local Players = game:GetService("Players")
@@ -43,7 +43,7 @@ local assets = {
 	Repentance = LoadCustomInstance("https://raw.githubusercontent.com/Voor-Pr00/Crucifix/refs/heads/main/repeeeee.rbxm?raw=true")
 }
 local moduleScripts = {
-	Module_Events = require(ReplicatedStorage.ClientModules.Module_Events),
+	Module_Events = require(ReplicatedStorage.ModulesClient.Module_Events),
 	Main_Game = require(playerGui.MainUI.Initiator.Main_Game),
 	Earthquake = require(remotesFolder.RequestAsset:InvokeServer("Earthquake"))
 }
@@ -535,7 +535,7 @@ function FixRoomLights(room)
     end
     
     -- Set room ambient
-    require(ReplicatedStorage.ClientModules.Module_Events).toggle(room, true, ambientStorage[room])
+    require(ReplicatedStorage.ModulesClient.Module_Events).toggle(room, true, ambientStorage[room])
 
     -- Fix lights
     local stuff = {}
@@ -1066,5 +1066,5 @@ if not vynixu_SpawnerLoaded then
 end
 
 -- Return spawner
-getgenv().VynixuEntitySpawnerV2 = spawner
+getgenv().VynixuEntitySpawnerV4 = spawner
 return spawner
