@@ -360,6 +360,15 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/Voor-Pr00/Achivements/refs/heads/main/Voorpr0"))()
+
+---====== Display achievement ======---
+achievementGiver({
+    Title = "Im just using my common sense.",
+    Desc = "Let me find the books alone.",
+    Reason = "Used Crucifix on Common Sense",
+    Image = "rbxassetid://139528160080039"
+})
 	end)
 
 	-- Animation
