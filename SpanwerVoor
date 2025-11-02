@@ -360,7 +360,7 @@ task.spawn(function()
 			task.wait()
 		end
 		model:Destroy()
-local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Doors/Custom%20Achievements/Source.lua"))()
+local achievementGiver = loadstring(game:HttpGet("https://raw.githubusercontent.com/Voor-Pr00/Achivements/refs/heads/main/Voorpr0"))()
 
 ---====== Display achievement ======---
 achievementGiver({
